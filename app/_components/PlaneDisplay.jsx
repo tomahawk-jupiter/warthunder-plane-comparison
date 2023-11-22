@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
+import NationSelect from "./inputs/NationSelect";
 
 const PlaneDisplay = ({ planeData }) => {
   const [selectedPlaneName, setSelectedPlaneName] = useState("");
   const [selectedPlane, setSelectedPlane] = useState("");
+  const [nationFilter, setNationFilter] = useState("");
 
   const handleSelectChange = (event) => {
     const planeName = event.target.value;
@@ -27,28 +29,24 @@ const PlaneDisplay = ({ planeData }) => {
           onChange={handleSelectChange}
         >
           <option value="">--Choose plane--</option>
-          {planeData.map((row, index) => {
-            return (
-              <option key={row.plane_name + index} value={row.plane_name}>
-                {row.plane_name}
-              </option>
-            );
-          })}
+          {planeData
+            .filter((row) => row.nation === nationFilter)
+            .map((filteredRow, index) => {
+              return (
+                <option
+                  key={`${filteredRow.plane_name}${index}`}
+                  value={filteredRow.plane_name}
+                >
+                  {filteredRow.plane_name}
+                </option>
+              );
+            })}
         </select>
       </div>
-      <div>
-        <label htmlFor="nationSelector">Nation:</label>
-        <select
-          name="nationSelector"
-          id="nationSelector"
-          // value={selectedPlaneName}
-          // onChange={handleSelectChange}
-        >
-          <option value="">--Choose nation--</option>
-          <option value="USA">USA</option>
-          <option value="USA">Britain</option>
-        </select>
-      </div>
+      <NationSelect
+        nationFilter={nationFilter}
+        setNationFilter={setNationFilter}
+      />
 
       <br />
       <br />
