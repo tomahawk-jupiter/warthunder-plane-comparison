@@ -2,21 +2,22 @@
 import { useState } from "react";
 import NationSelect from "./inputs/NationSelect";
 import Image from "next/image";
+import Stat from "./Stat";
 
-const PlaneDisplay = ({ planeData }) => {
-  const [selectedPlaneName, setSelectedPlaneName] = useState("");
+const PlaneDisplay = ({ planeData, setPlaneStats, bestStats }) => {
+  const [selectedPlaneName, setSelectedPlaneName] = useState("Select Above");
   const [selectedPlane, setSelectedPlane] = useState("");
-  const [nationFilter, setNationFilter] = useState("");
+  const [nationFilter, setNationFilter] = useState("--Choose nation--");
 
   const handleSelectChange = (event) => {
     const planeName = event.target.value;
-    console.log({ planeName });
 
     // Find the selected plane object based on the plane name
     const plane = planeData.find((row) => row.plane_name === planeName);
 
     setSelectedPlaneName(planeName);
     setSelectedPlane(plane);
+    setPlaneStats(plane);
   };
 
   return (
@@ -31,7 +32,11 @@ const PlaneDisplay = ({ planeData }) => {
         >
           <option value="">--Choose plane--</option>
           {planeData
-            .filter((row) => row.nation === nationFilter)
+            .filter(
+              (row) =>
+                row.nation === nationFilter ||
+                nationFilter == "--Choose nation--"
+            )
             .map((filteredRow, index) => {
               return (
                 <option
@@ -51,21 +56,74 @@ const PlaneDisplay = ({ planeData }) => {
 
       <br />
       <br />
-      <br />
-      <hr />
 
       <h2 className="text-4xl font-extrabold">{selectedPlaneName}</h2>
 
-      <Image src={selectedPlane.image_url} width={300} height={300} />
+      <Image
+        src={
+          selectedPlane.image_url ||
+          "https://wiki.warthunder.com/images/d/de/Img_plane.png"
+        }
+        alt={selectedPlaneName}
+        width={300}
+        height={300}
+        className="w-80 h-50 object-cover"
+      />
 
-      <div>Nation: {selectedPlane.nation}</div>
-      <div>Rank: {selectedPlane.rank}</div>
-      <div>BR: {selectedPlane.battle_rating}</div>
-      <div>Max Speed: {selectedPlane.max_speed}</div>
-      <div>Turn Time: {selectedPlane.turn_time}</div>
-      <div>Climb Rate: {selectedPlane.climb_rate}</div>
-      <div>Wing Rip: {selectedPlane.wind_rip_speed}</div>
-      <div>Flap Rip: {selectedPlane.combat_flap_rip_speed}</div>
+      {/*
+        battle_rating: 0,
+        max_speed: 0,
+        turn_time: 0,
+        climb_rate: 0,
+        wing_rip_speed: 0,
+        combat_flap_rip_speed: 0,
+    */}
+
+      <div>
+        <span>Nation:</span>
+        <span>{selectedPlane.nation}</span>
+      </div>
+      <div>
+        <span>Rank:</span>
+        <span>{selectedPlane.rank}</span>
+      </div>
+
+      <Stat
+        statLabel={"BR"}
+        statValue={selectedPlane.battle_rating}
+        selectedPlaneName={selectedPlaneName}
+        bestStat={bestStats.battle_rating}
+      />
+      <Stat
+        statLabel={"Max Speed"}
+        statValue={selectedPlane.max_speed}
+        selectedPlaneName={selectedPlaneName}
+        bestStat={bestStats.max_speed}
+      />
+      <Stat
+        statLabel={"Turn Time"}
+        statValue={selectedPlane.turn_time}
+        selectedPlaneName={selectedPlaneName}
+        bestStat={bestStats.turn_time}
+      />
+      <Stat
+        statLabel={"Climb Rate"}
+        statValue={selectedPlane.climb_rate}
+        selectedPlaneName={selectedPlaneName}
+        bestStat={bestStats.climb_rate}
+      />
+      <Stat
+        statLabel={"Wing Rip"}
+        statValue={selectedPlane.wind_rip_speed}
+        selectedPlaneName={selectedPlaneName}
+        bestStat={bestStats.wind_rip_speed}
+      />
+      <Stat
+        statLabel={"Flap Rip"}
+        statValue={selectedPlane.combat_flap_rip_speed}
+        selectedPlaneName={selectedPlaneName}
+        bestStat={bestStats.combat_flap_rip_speed}
+      />
     </div>
   );
 };

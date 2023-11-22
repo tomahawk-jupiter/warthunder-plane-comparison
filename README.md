@@ -1,5 +1,7 @@
 # Warthunder Plane Comparison
 
+THIS IS A WORK IN PROGRESS
+
 Compare plane stats for the game Warthunder. Choose plane 1, choose plane 2, compare their stats.
 
 NOTE: This repo includes a python script for scraping the plane data from the War Thunder wiki.
