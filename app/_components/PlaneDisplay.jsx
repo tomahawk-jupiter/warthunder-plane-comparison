@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import NationSelect from "./inputs/NationSelect";
+import Image from "next/image";
 
 const PlaneDisplay = ({ planeData }) => {
   const [selectedPlaneName, setSelectedPlaneName] = useState("");
@@ -54,6 +55,8 @@ const PlaneDisplay = ({ planeData }) => {
       <hr />
 
       <h2 className="text-4xl font-extrabold">{selectedPlaneName}</h2>
+
+      <Image src={selectedPlane.image_url} width={300} height={300} />
 
       <div>Nation: {selectedPlane.nation}</div>
       <div>Rank: {selectedPlane.rank}</div>
