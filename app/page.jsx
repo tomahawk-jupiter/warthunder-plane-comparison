@@ -47,13 +47,19 @@ export default function Home() {
       return 0; // Equal
     }
 
+    function compareTurn(stat1, stat2) {
+      if (stat1 < stat2) return 1;
+      if (stat1 > stat2) return -1;
+      return 0; // Equal
+    }
+
     const bestStatsObject = {
       battle_rating: compareStats(
         planeOneStats.battle_rating,
         planeTwoStats.battle_rating
       ),
       max_speed: compareStats(planeOneStats.max_speed, planeTwoStats.max_speed),
-      turn_time: compareStats(planeOneStats.turn_time, planeTwoStats.turn_time),
+      turn_time: compareTurn(planeOneStats.turn_time, planeTwoStats.turn_time),
       climb_rate: compareStats(
         planeOneStats.climb_rate,
         planeTwoStats.climb_rate

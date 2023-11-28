@@ -11,7 +11,7 @@ const Stat = ({ statLabel, statValue, selectedPlaneName, bestStat }) => {
             : "text-red-900"
         } font-bold pl-1`}
       >
-        {statValue}
+        {statValue ? statValue : "None"}
       </span>
     </div>
   );

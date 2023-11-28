@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import usePlaneFilter from "./hooks/usePlaneFilter";
 import NationSelect from "./inputs/NationSelect";
 import Image from "next/image";
@@ -15,6 +15,11 @@ const PlaneDisplay = ({
 }) => {
   const [selectedPlaneName, setSelectedPlaneName] = useState(planeOneOrTwo);
   const [selectedPlane, setSelectedPlane] = useState("");
+
+  // TODO: remove when done
+  useEffect(() => {
+    console.log({ selectedPlane });
+  }, [selectedPlane]);
 
   const {
     filteredData,
@@ -93,11 +98,11 @@ const PlaneDisplay = ({
 
       <div>
         <span>Nation:</span>
-        <span>{selectedPlane.nation}</span>
+        <span className="font-bold pl-1">{selectedPlane.nation}</span>
       </div>
       <div>
         <span>Rank:</span>
-        <span>{selectedPlane.rank}</span>
+        <span className="font-bold pl-1">{selectedPlane.rank}</span>
       </div>
 
       <Stat
@@ -126,9 +131,9 @@ const PlaneDisplay = ({
       />
       <Stat
         statLabel={"Wing Rip"}
-        statValue={selectedPlane.wind_rip_speed}
+        statValue={selectedPlane.wing_rip_speed}
         selectedPlaneName={selectedPlaneName}
-        bestStat={bestStats.wind_rip_speed}
+        bestStat={bestStats.wing_rip_speed}
       />
       <Stat
         statLabel={"Flap Rip"}
