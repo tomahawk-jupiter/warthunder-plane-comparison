@@ -3,13 +3,13 @@ const Stat = ({ statLabel, statValue, selectedPlaneName, bestStat }) => {
     <div>
       <span>{statLabel}:</span>
       <span
-        className={
+        className={`${
           bestStat == selectedPlaneName
             ? "text-green-700"
             : bestStat == "Equal"
             ? ""
             : "text-red-900"
-        }
+        } font-bold pl-1`}
       >
         {statValue}
       </span>

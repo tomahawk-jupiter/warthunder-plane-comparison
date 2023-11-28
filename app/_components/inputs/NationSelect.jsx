@@ -18,7 +18,9 @@ const NationSelect = ({ nationFilter, setNationFilter }) => {
   };
   return (
     <div>
-      <label htmlFor="nationSelector">Nation:</label>
+      <label className="w-28 inline-block" htmlFor="nationSelector">
+        Nation:
+      </label>
       <select
         name="nationSelector"
         id="nationSelector"

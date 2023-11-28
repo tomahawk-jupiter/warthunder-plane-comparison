@@ -83,18 +83,25 @@ export default function Home() {
   }, [planeOneStats, planeTwoStats]);
 
   return (
-    <main className="flex flex-col min-h-screen items-center p-24">
-      <h1>Warthunder planes!!!</h1>
-      <div className="flex flex-row">
+    <main className="flex flex-col min-h-screen max-w-7xl p-4 mx-auto">
+      {/* <h1>War Thunder Plane Comparison</h1> */}
+      <h1 className="text-4xl font-extrabold text-center mt-8 mb-4">
+        War Thunder Plane Comparison
+      </h1>
+
+      {/* <div className="flex flex-row"> */}
+      <div className="flex flex-col md:flex-row">
         <PlaneDisplay
           planeData={planeData}
           setPlaneStats={setPlaneOneStats}
           bestStats={bestStats}
+          planeOneOrTwo={"Plane One"}
         />
         <PlaneDisplay
           planeData={planeData}
           setPlaneStats={setPlaneTwoStats}
           bestStats={bestStats}
+          planeOneOrTwo={"Plane Two"}
         />
       </div>
     </main>

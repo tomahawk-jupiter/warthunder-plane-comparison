@@ -7,7 +7,9 @@ const RankSelect = ({ rankFilter, setRankFilter }) => {
 
   return (
     <div>
-      <label htmlFor="rank-selector">Rank:</label>
+      <label className="w-28 inline-block" htmlFor="rank-selector">
+        Rank:
+      </label>
       <select
         name="rank-selector"
         id="rank-selector"

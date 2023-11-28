@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import usePlaneFilter from "./hooks/usePlaneFilter";
 import NationSelect from "./inputs/NationSelect";
 import Image from "next/image";
@@ -7,8 +7,13 @@ import Stat from "./Stat";
 import RankSelect from "./inputs/RankSelect";
 import BattleRatingSelect from "./inputs/BattleRatingSelect";
 
-const PlaneDisplay = ({ planeData, setPlaneStats, bestStats }) => {
-  const [selectedPlaneName, setSelectedPlaneName] = useState("Select Above");
+const PlaneDisplay = ({
+  planeData,
+  setPlaneStats,
+  bestStats,
+  planeOneOrTwo,
+}) => {
+  const [selectedPlaneName, setSelectedPlaneName] = useState(planeOneOrTwo);
   const [selectedPlane, setSelectedPlane] = useState("");
 
   const {
@@ -31,48 +36,49 @@ const PlaneDisplay = ({ planeData, setPlaneStats, bestStats }) => {
   };
 
   return (
-    <div>
-      <div>
-        <label htmlFor="planeSelector">Plane Name:</label>
-        <select
-          name="planeSelector"
-          id="planeSelector"
-          value={selectedPlaneName}
-          onChange={handleSelectChange}
-        >
-          <option value="">--Choose plane--</option>
-          {filteredData.map((filteredRow, index) => {
-            return (
-              <option
-                key={`${filteredRow.plane_name}${index}`}
-                value={filteredRow.plane_name}
-              >
-                {filteredRow.plane_name}
-              </option>
-            );
-          })}
-        </select>
+    <div className="flex-1 m-8">
+      <div className="border p-4">
+        <h3 className="font-extrabold">{planeOneOrTwo}</h3>
+        <div>
+          <label className="w-28 inline-block" htmlFor="planeSelector">
+            Plane Name:
+          </label>
+          <select
+            name="planeSelector"
+            id="planeSelector"
+            value={selectedPlaneName}
+            onChange={handleSelectChange}
+          >
+            <option value="">--Choose plane--</option>
+            {filteredData.map((filteredRow, index) => {
+              return (
+                <option
+                  key={`${filteredRow.plane_name}${index}`}
+                  value={filteredRow.plane_name}
+                >
+                  {filteredRow.plane_name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <NationSelect
+          nationFilter={nationFilter}
+          setNationFilter={setNationFilter}
+        />
+
+        <RankSelect rankFilter={rankFilter} setRankFilter={setRankFilter} />
+
+        <BattleRatingSelect
+          battleRatingFilter={battleRatingFilter}
+          setBattleRatingFilter={setBattleRatingFilter}
+        />
       </div>
-      <NationSelect
-        nationFilter={nationFilter}
-        setNationFilter={setNationFilter}
-      />
-
-      <RankSelect rankFilter={rankFilter} setRankFilter={setRankFilter} />
-      {/* 
-        TODO: make this checkbox filter functional, 
-        ie. filter the available planes available in the planeSelector 
-        */}
-
-      <BattleRatingSelect
-        battleRatingFilter={battleRatingFilter}
-        setBattleRatingFilter={setBattleRatingFilter}
-      />
 
       <br />
       <br />
 
-      <h2 className="text-4xl font-extrabold">{selectedPlaneName}</h2>
+      <h2 className="text-3xl font-extrabold h-20">{selectedPlaneName}</h2>
 
       <Image
         src={
@@ -82,17 +88,8 @@ const PlaneDisplay = ({ planeData, setPlaneStats, bestStats }) => {
         alt={selectedPlaneName}
         width={300}
         height={300}
-        className="w-80 h-50 object-cover"
+        className="w-full h-auto max-w-3xl object-cover"
       />
-
-      {/*
-        battle_rating: 0,
-        max_speed: 0,
-        turn_time: 0,
-        climb_rate: 0,
-        wing_rip_speed: 0,
-        combat_flap_rip_speed: 0,
-    */}
 
       <div>
         <span>Nation:</span>
@@ -144,26 +141,3 @@ const PlaneDisplay = ({ planeData, setPlaneStats, bestStats }) => {
 };
 
 export default PlaneDisplay;
-
-/**** Type in text input and see a list of options as you type *****/
-
-/* <input
-  type="text"
-  list="planeList"
-  name="planeSelector"
-  id="planeSelector"
-  value={selectedPlaneName}
-  onChange={handleSelectChange}
-  className="border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
-  // className="form-select"
-/>
-
-<datalist
-  id="planeList"
-  className="absolute z-10 mt-2 w-64 bg-white border border-gray-300 rounded-md shadow-lg"
->
-  <option value="--Choose plane--" />
-  {planeData.map((row) => {
-    return <option key={row.plane_name} value={row.plane_name} />;
-  })}
-</datalist> */

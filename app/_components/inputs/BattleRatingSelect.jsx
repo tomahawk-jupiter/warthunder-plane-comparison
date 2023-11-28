@@ -40,7 +40,9 @@ const BattleRatingSelect = ({ battleRatingFilter, setBattleRatingFilter }) => {
 
   return (
     <div>
-      <label htmlFor="battle-rating-selector">Battle Rating:</label>
+      <label className="w-28 inline-block" htmlFor="battle-rating-selector">
+        Battle Rating:
+      </label>
       <select
         name="battle-rating-selector"
         id="battle-rating-selector"
