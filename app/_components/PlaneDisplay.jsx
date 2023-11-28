@@ -16,11 +16,6 @@ const PlaneDisplay = ({
   const [selectedPlaneName, setSelectedPlaneName] = useState(planeOneOrTwo);
   const [selectedPlane, setSelectedPlane] = useState("");
 
-  // TODO: remove when done
-  useEffect(() => {
-    console.log({ selectedPlane });
-  }, [selectedPlane]);
-
   const {
     filteredData,
     setNationFilter,
