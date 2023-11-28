@@ -1,4 +1,16 @@
-import nations from "../../../data/nations";
+const nations = [
+  "All",
+  "USA",
+  "Germany",
+  "USSR",
+  "Britain",
+  "Japan",
+  "France",
+  "China",
+  "Italy",
+  "Sweden",
+  "Israel",
+];
 
 const NationSelect = ({ nationFilter, setNationFilter }) => {
   const handleSelectChange = (event) => {

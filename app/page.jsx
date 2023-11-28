@@ -38,6 +38,7 @@ export default function Home() {
 
   useEffect(() => {
     // TODO: what if values are the same? Store as 2?
+    // use a reusable switch statement for the 3 possible outcomes
     const bestStatsObject = {
       battle_rating:
         planeOneStats.battle_rating > planeTwoStats.battle_rating

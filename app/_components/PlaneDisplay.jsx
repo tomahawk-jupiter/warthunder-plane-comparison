@@ -1,18 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import usePlaneFilter from "./hooks/usePlaneFilter";
 import NationSelect from "./inputs/NationSelect";
 import Image from "next/image";
 import Stat from "./Stat";
+import RankSelect from "./inputs/RankSelect";
+import BattleRatingSelect from "./inputs/BattleRatingSelect";
 
 const PlaneDisplay = ({ planeData, setPlaneStats, bestStats }) => {
   const [selectedPlaneName, setSelectedPlaneName] = useState("Select Above");
   const [selectedPlane, setSelectedPlane] = useState("");
-  const [nationFilter, setNationFilter] = useState("--Choose nation--");
+
+  const {
+    filteredData,
+    setNationFilter,
+    setRankFilter,
+    setBattleRatingFilter,
+    nationFilter,
+    rankFilter,
+    battleRatingFilter,
+  } = usePlaneFilter(planeData);
 
   const handleSelectChange = (event) => {
     const planeName = event.target.value;
-
-    // Find the selected plane object based on the plane name
     const plane = planeData.find((row) => row.plane_name === planeName);
 
     setSelectedPlaneName(planeName);
@@ -31,27 +41,32 @@ const PlaneDisplay = ({ planeData, setPlaneStats, bestStats }) => {
           onChange={handleSelectChange}
         >
           <option value="">--Choose plane--</option>
-          {planeData
-            .filter(
-              (row) =>
-                row.nation === nationFilter ||
-                nationFilter == "--Choose nation--"
-            )
-            .map((filteredRow, index) => {
-              return (
-                <option
-                  key={`${filteredRow.plane_name}${index}`}
-                  value={filteredRow.plane_name}
-                >
-                  {filteredRow.plane_name}
-                </option>
-              );
-            })}
+          {filteredData.map((filteredRow, index) => {
+            return (
+              <option
+                key={`${filteredRow.plane_name}${index}`}
+                value={filteredRow.plane_name}
+              >
+                {filteredRow.plane_name}
+              </option>
+            );
+          })}
         </select>
       </div>
       <NationSelect
         nationFilter={nationFilter}
         setNationFilter={setNationFilter}
+      />
+
+      <RankSelect rankFilter={rankFilter} setRankFilter={setRankFilter} />
+      {/* 
+        TODO: make this checkbox filter functional, 
+        ie. filter the available planes available in the planeSelector 
+        */}
+
+      <BattleRatingSelect
+        battleRatingFilter={battleRatingFilter}
+        setBattleRatingFilter={setBattleRatingFilter}
       />
 
       <br />
