@@ -4,7 +4,11 @@ const Stat = ({ statLabel, statValue, selectedPlaneName, bestStat }) => {
       <span>{statLabel}:</span>
       <span
         className={
-          bestStat == selectedPlaneName ? "text-green-700" : "text-red-900"
+          bestStat == selectedPlaneName
+            ? "text-green-700"
+            : bestStat == "Equal"
+            ? ""
+            : "text-red-900"
         }
       >
         {statValue}
