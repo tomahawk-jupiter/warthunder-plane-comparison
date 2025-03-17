@@ -1,11 +1,12 @@
-"use client";
-import { useState, useEffect } from "react";
-import usePlaneFilter from "./hooks/usePlaneFilter";
-import NationSelect from "./inputs/NationSelect";
-import Image from "next/image";
-import Stat from "./Stat";
-import RankSelect from "./inputs/RankSelect";
-import BattleRatingSelect from "./inputs/BattleRatingSelect";
+'use client';
+import { useState, useEffect } from 'react';
+import usePlaneFilter from './hooks/usePlaneFilter';
+import NationSelect from './inputs/NationSelect';
+import Image from 'next/image';
+import Stat from './Stat';
+import RankSelect from './inputs/RankSelect';
+import BattleRatingSelect from './inputs/BattleRatingSelect';
+import defaultImage from '../../data/fighter.svg';
 
 const PlaneDisplay = ({
   planeData,
@@ -14,7 +15,7 @@ const PlaneDisplay = ({
   planeOneOrTwo,
 }) => {
   const [selectedPlaneName, setSelectedPlaneName] = useState(planeOneOrTwo);
-  const [selectedPlane, setSelectedPlane] = useState("");
+  const [selectedPlane, setSelectedPlane] = useState('');
 
   const {
     filteredData,
@@ -81,10 +82,7 @@ const PlaneDisplay = ({
       <h2 className="text-3xl font-extrabold h-20">{selectedPlaneName}</h2>
 
       <Image
-        src={
-          selectedPlane.image_url ||
-          "https://wiki.warthunder.com/images/d/de/Img_plane.png"
-        }
+        src={defaultImage}
         alt={selectedPlaneName}
         width={300}
         height={300}
@@ -101,37 +99,37 @@ const PlaneDisplay = ({
       </div>
 
       <Stat
-        statLabel={"BR"}
+        statLabel={'BR'}
         statValue={selectedPlane.battle_rating}
         selectedPlaneName={selectedPlaneName}
         bestStat={bestStats.battle_rating}
       />
       <Stat
-        statLabel={"Max Speed"}
+        statLabel={'Max Speed'}
         statValue={selectedPlane.max_speed}
         selectedPlaneName={selectedPlaneName}
         bestStat={bestStats.max_speed}
       />
       <Stat
-        statLabel={"Turn Time"}
+        statLabel={'Turn Time'}
         statValue={selectedPlane.turn_time}
         selectedPlaneName={selectedPlaneName}
         bestStat={bestStats.turn_time}
       />
       <Stat
-        statLabel={"Climb Rate"}
+        statLabel={'Climb Rate'}
         statValue={selectedPlane.climb_rate}
         selectedPlaneName={selectedPlaneName}
         bestStat={bestStats.climb_rate}
       />
       <Stat
-        statLabel={"Wing Rip"}
+        statLabel={'Wing Rip'}
         statValue={selectedPlane.wing_rip_speed}
         selectedPlaneName={selectedPlaneName}
         bestStat={bestStats.wing_rip_speed}
       />
       <Stat
-        statLabel={"Flap Rip"}
+        statLabel={'Flap Rip'}
         statValue={selectedPlane.combat_flap_rip_speed}
         selectedPlaneName={selectedPlaneName}
         bestStat={bestStats.combat_flap_rip_speed}
