@@ -2,7 +2,7 @@
 
 ![Project screenshot](./public/screenshot.png)
 
-Note: there is a new wiki and the image urls are broken so I replaced with a placeholder. The scraper is likey also unusable now.
+IMPORTANT: there is a new wiki and the image urls are broken so I replaced with a placeholder. The scraper is likey also unusable now.
 
 ## Contents
 
